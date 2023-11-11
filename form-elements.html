@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Form Example</title>
+</head>
+
+<body>
+    <form action="" method="POST">
+        <!-- Text Input -->
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username">
+        <br><br>
+
+        <!-- Password Input -->
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password">
+        <br><br>
+
+        <!-- Textarea -->
+        <label for="message">Message:</label>
+        <textarea name="message" id="message"></textarea>
+        <br><br>
+
+        <!-- Radio Buttons -->
+        <label>Gender:</label>
+        <input type="radio" name="gender" value="male"> Male
+        <input type="radio" name="gender" value="female"> Female
+        <br><br>
+
+        <!-- Checkboxes -->
+        <label>Interests:</label>
+        <input type="checkbox" name="interest" value="music"> Music
+        <input type="checkbox" name="interest" value="sports"> Sports
+        <br><br>
+
+        <!-- Select Dropdown -->
+        <label for="country">Country:</label>
+        <select name="country" id="country">
+            <option value="usa">United States</option>
+            <option value="canada">Canada</option>
+        </select>
+        <br><br>
+
+        <!-- Submit and Reset Buttons -->
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+        <br><br>
+
+        <!-- File Input -->
+        <label for="myfile">Upload File:</label>
+        <input type="file" name="myfile" id="myfile">
+        <br><br>
+
+        <!-- Hidden Input -->
+        <input type="hidden" name="userid" value="123">
+        <br><br>
+
+        <!-- Button with onclick event -->
+        <button type="button" onclick="myFunction()">Click Me</button>
+    </form>
+
+    <script>
+        function myFunction() {
+            alert("Button clicked!");
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+}
+
+.container {
+    text-align: center;
+}
+
+h1 {
+    color: #3498db;
+}
+
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-gap: 5px;
+    margin-top: 20px;
+}
+
+.cell {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    color: #ecf0f1;
+    transition: background-color 0.3s;
+}
+
+.cell:hover {
+    background-color: #2980b9;
+}
+
+.cell:active {
+    background-color: #1f618d;
+}
+
+#message {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #e74c3c;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.winner {
+    background-color: #27ae60 !important;
+    color: #ecf0f1 !important;
+}
+
+.draw {
+    color: #f39c12;
+}
