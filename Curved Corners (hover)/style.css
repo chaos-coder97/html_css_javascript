@@ -1,0 +1,171 @@
+@import url(https://fonts.bunny.net/css?family=abel:400);
+
+@layer base, cards;
+
+
+@layer cards {
+    .card {
+        --hover-distance: 15px;
+        --img-w: 300px;
+        --img-h: 300px;
+        --clip-x: 100px;
+        --clip-y: 100px;
+        --bg-img: url("https://picsum.photos/id/478/200/300");
+
+        @media (width > 600px) {
+            --img-w: 400px;
+            --img-h: 400px;
+            --clip-x: 150px;
+            --clip-y: 150px;
+        }
+
+        position: relative;
+        width: var(--img-w);
+        height: var(--img-h);
+
+        filter: url("#goo-corners");
+
+        &:hover>.card-corner {
+            --x-tl: 0;
+            --y-tl: 0;
+            --x-tr: 0;
+            --y-tr: 0;
+            --x-br: 0;
+            --y-br: 0;
+            --x-bl: 0;
+            --y-bl: 0;
+        }
+
+        &>* {
+            background-image: var(--bg-img);
+            background-size: var(--img-w) var(--img-h);
+        }
+    }
+
+    .card-corner {
+        --x-tl: calc(var(--hover-distance) * -1);
+        --y-tl: calc(var(--hover-distance) * -1);
+        --x-tr: calc(var(--hover-distance) * 1);
+        --y-tr: calc(var(--hover-distance) * -1);
+        --x-br: calc(var(--hover-distance) * 1);
+        --y-br: calc(var(--hover-distance) * 1);
+        --x-bl: calc(var(--hover-distance) * -1);
+        --y-bl: calc(var(--hover-distance) * 1);
+
+        position: absolute;
+
+        width: var(--clip-x);
+        height: var(--clip-y);
+        translate: var(--corner-x) var(--corner-y);
+        transition: translate 500ms;
+        transition-timing-function: linear(0,
+                0.459 20.4%,
+                1 37.8%,
+                0.833 44.6%,
+                0.794 47.6%,
+                0.781 50.5%,
+                0.791 53.2%,
+                0.824 56.1%,
+                0.999 65.5%,
+                0.946 69.5%,
+                0.929 73.3%,
+                0.941 76.8%,
+                1 84.5%,
+                0.986 89.3%,
+                1);
+
+        &.tl {
+            --corner-x: var(--x-tl, 0);
+            --corner-y: var(--y-tl, 0);
+            top: 0;
+            left: 0;
+            clip-path: polygon(0 0, 100% 0, 0 100%);
+            background-position: top left;
+        }
+
+        &.tr {
+            --corner-x: var(--x-tr, 0);
+            --corner-y: var(--y-tr, 0);
+            top: 0;
+            right: 0;
+            clip-path: polygon(0 0, 100% 0, 100% 100%);
+            background-position: top right;
+        }
+
+        &.br {
+            --corner-x: var(--x-br, 0);
+            --corner-y: var(--y-br, 0);
+            bottom: 0;
+            right: 0;
+            clip-path: polygon(100% 0, 100% 100%, 0 100%);
+            background-position: bottom right;
+        }
+
+        &.bl {
+            --corner-x: var(--x-bl, 0);
+            --corner-y: var(--y-bl, 0);
+            bottom: 0;
+            left: 0;
+            clip-path: polygon(0 0, 0 100%, 100% 100%);
+            background-position: bottom left;
+        }
+    }
+
+    .card-main {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+
+        clip-path: polygon(var(--clip-x) 0,
+                calc(100% - var(--clip-x)) 0,
+                100% var(--clip-y),
+                100% calc(100% - var(--clip-y)),
+                calc(100% - var(--clip-x)) 100%,
+                var(--clip-x) 100%,
+                0 calc(100% - var(--clip-y)),
+                0 var(--clip-y));
+    }
+
+    h1 {
+        text-align: center;
+        font-weight: 300;
+        font-size: 1.2rem;
+    }
+
+    @layer base {
+        * {
+            box-sizing: border-box;
+        }
+
+        :root {
+            color-scheme: light dark;
+            --bg-dark: rgb(24, 24, 27);
+            --bg-light: rgb(231, 229, 228);
+
+            --txt-light: rgb(10, 10, 10);
+            --txt-dark: rgb(245, 245, 245);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-timeline: --page-scroll block;
+            scroll-timeline: --page-scroll vertical;
+        }
+
+        body {
+            background-color: light-dark(var(--bg-light), var(--bg-dark));
+            color: light-dark(var(--txt-light), var(--txt-dark));
+            min-height: 100svh;
+            margin: 0;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-family: "Abel", sans-serif;
+            line-height: 1.5;
+            display: grid;
+            place-content: center;
+            gap: 1rem;
+        }
+    }
+}

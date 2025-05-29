@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Chaos Coder - Search Bar</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
+  <style>
+    :root {
+      --primary-color: #6c5ce7;
+      --secondary-color: #a29bfe;
+      --accent-color: #fd79a8;
+      --text-color: #2d3436;
+      --light-text: #f5f6fa;
+      --bg-color: #f8f9fa;
+      --search-bg: rgba(255, 255, 255, 0.9);
+      --transition-speed: 0.4s;
+    }
+
+    body {
+      background: var(--bg-color);
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    .search-wrapper {
+      position: relative;
+      width: 70px;
+      transition: all var(--transition-speed) cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    }
+
+    .search-wrapper.active {
+      width: 450px;
+    }
+
+    .input-holder {
+      height: 70px;
+      width: 100%;
+      overflow: hidden;
+      background: var(--search-bg);
+      border-radius: 6px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all var(--transition-speed) cubic-bezier(0.000, 0.105, 0.035, 1.570);
+    }
+
+    .search-wrapper.active .input-holder {
+      border-radius: 50px;
+      box-shadow: 0 5px 20px rgba(108, 92, 231, 0.2);
+    }
+
+    .search-input {
+      width: 100%;
+      height: 50px;
+      padding: 0px 70px 0 25px;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--text-color);
+      transform: translate(0, 60px);
+      transition: all var(--transition-speed) cubic-bezier(0.000, 0.105, 0.035, 1.570);
+      transition-delay: 0.3s;
+    }
+
+    .search-wrapper.active .search-input {
+      opacity: 1;
+      transform: translate(0, 10px);
+    }
+
+    .search-icon {
+      width: 70px;
+      height: 70px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      padding: 0;
+      outline: none;
+      position: relative;
+      z-index: 2;
+      float: right;
+      cursor: pointer;
+      transition: all var(--transition-speed) ease-in-out;
+    }
+
+    .search-wrapper.active .search-icon {
+      width: 50px;
+      height: 50px;
+      margin: 10px;
+      border-radius: 30px;
+    }
+
+    .search-icon span {
+      width: 22px;
+      height: 22px;
+      display: inline-block;
+      vertical-align: middle;
+      position: relative;
+      transform: rotate(45deg);
+      transition: all var(--transition-speed) cubic-bezier(0.650, -0.600, 0.240, 1.650);
+    }
+
+    .search-wrapper.active .search-icon span {
+      transform: rotate(-45deg);
+    }
+
+    .search-icon span::before,
+    .search-icon span::after {
+      position: absolute;
+      content: '';
+    }
+
+    .search-icon span::before {
+      width: 4px;
+      height: 11px;
+      left: 9px;
+      top: 18px;
+      border-radius: 2px;
+      background: var(--light-text);
+    }
+
+    .search-icon span::after {
+      width: 14px;
+      height: 14px;
+      left: 0;
+      top: 0;
+      border-radius: 16px;
+      border: 4px solid var(--light-text);
+    }
+
+    .close {
+      position: absolute;
+      z-index: 1;
+      top: 24px;
+      right: 20px;
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      transform: rotate(-180deg);
+      transition: all var(--transition-speed) cubic-bezier(0.285, -0.450, 0.935, 0.110);
+      transition-delay: 0.2s;
+      opacity: 0;
+    }
+
+    .search-wrapper.active .close {
+      right: -50px;
+      transform: rotate(45deg);
+      opacity: 1;
+      transition: all calc(var(--transition-speed) * 1.5) cubic-bezier(0.000, 0.105, 0.035, 1.570);
+      transition-delay: 0.5s;
+    }
+
+    .close::before,
+    .close::after {
+      position: absolute;
+      content: '';
+      background: var(--accent-color);
+      border-radius: 2px;
+    }
+
+    .close::before {
+      width: 5px;
+      height: 25px;
+      left: 10px;
+      top: 0;
+    }
+
+    .close::after {
+      width: 25px;
+      height: 5px;
+      left: 0;
+      top: 10px;
+    }
+
+    .search-input::placeholder {
+      color: rgba(45, 52, 54, 0.5);
+      font-weight: 300;
+    }
+
+    .search-wrapper.active .input-holder {
+      background: var(--search-bg);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="search-wrapper">
+    <div class="input-holder">
+      <input type="text" class="search-input" placeholder="Search for anything..." />
+      <button class="search-icon" onclick="searchToggle(this, event);"><span></span></button>
+    </div>
+    <span class="close" onclick="searchToggle(this, event);"></span>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+  <script>
+    function searchToggle(obj, evt) {
+      var container = $(obj).closest('.search-wrapper');
+      if (!container.hasClass('active')) {
+        container.addClass('active');
+        evt.preventDefault();
+      }
+      else if (container.hasClass('active') && $(obj).closest('.input-holder').length == 0) {
+        container.removeClass('active');
+        container.find('.search-input').val('');
+      }
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    background: radial-gradient(circle, rgba(0, 0, 0, 1) 10%, rgba(10, 10, 10, 1) 90%);
+    overflow: hidden;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#fireworks-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-family: 'Arial', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(90deg, #FF6B6B, #FFD93D, #6BCB77, #4D96FF, #9A55FF);
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+    animation: glow 2s ease-in-out infinite, gradientShift 5s linear infinite;
+}
+
+@keyframes glow {
+
+    0%,
+    100% {
+        text-shadow: 0 0 10px #FFD93D, 0 0 20px #FF6B6B, 0 0 30px #6BCB77;
+    }
+
+    50% {
+        text-shadow: 0 0 20px #4D96FF, 0 0 30px #9A55FF, 0 0 40px #FFD93D;
+    }
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.particle {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 0, 1) 50%, rgba(0, 0, 0, 0) 100%);
+    animation: move 2s ease-out forwards;
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--dx), var(--dy)) scale(0.7);
+        opacity: 0;
+    }
+}
+
+html,
+body {
+    overflow: hidden;
+}

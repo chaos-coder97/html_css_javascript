@@ -1,0 +1,230 @@
+:root {
+    --g: #0f0;
+    --bg-dots: #010;
+    --bg-lines: #030;
+    --bg-screen: #000100;
+    --bg-light: #B3C7DD;
+    --bg-dark: #6C7A88;
+    --white-hi: #f1f1f1;
+    --white-low: #9d9e9f;
+    --base: #ffffff;
+
+    --dot-opacity: 0.5;
+    --line-opacity: 0.25;
+    --radial-opacity: 0.25;
+    --trail-length: 90deg;
+    --blend: color-dodge;
+    --speed: 10s;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background:
+        linear-gradient(to top,
+            var(--bg-dark), var(--bg-light));
+    overflow: hidden;
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    transition: all .3s ease;
+
+    &:has(input:checked) {
+        --g: #f00;
+        --bg-dots: #f00;
+        --bg-lines: #700;
+        --bg-screen: #100;
+        --blend: darken;
+        --trail-length: 210deg;
+        --speed: 3s;
+
+        #radar::after {
+            content: '';
+            backdrop-filter: blur(0.5px);
+        }
+    }
+}
+
+#radar-container {
+    display: flex;
+    width: 75vmin;
+    flex-direction: column;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+
+    #radar {
+        width: 100%;
+        aspect-ratio: 1;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background:
+            linear-gradient(to bottom,
+                var(--white-hi), var(--white-low));
+        box-shadow:
+            inset 0 -3px 10px rgba(0, 0, 0, 0.25),
+            0 15px 18px rgba(0, 0, 0, 0.5);
+        border-radius: 50%;
+        z-index: 2;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            transition: all .3s ease;
+        }
+
+        &::before {
+            z-index: -1;
+            background-color: var(--bg-screen);
+            background-image:
+                linear-gradient(to bottom,
+                    transparent calc(50%),
+                    hsl(from var(--bg-lines) h s l / var(--line-opacity)),
+                    transparent calc(50% + 1px)),
+                linear-gradient(to right,
+                    transparent calc(50%),
+                    hsl(from var(--bg-lines) h s l / var(--line-opacity)),
+                    transparent calc(50% + 1px)),
+                linear-gradient(45deg,
+                    transparent calc(50%),
+                    hsl(from var(--bg-lines) h s l / var(--line-opacity)),
+                    transparent calc(50% + 1px)),
+                linear-gradient(-45deg,
+                    transparent calc(50%),
+                    hsl(from var(--bg-lines) h s l / var(--line-opacity)),
+                    transparent calc(50% + 1px)),
+                repeating-radial-gradient(hsl(from var(--bg-lines) h s l / var(--radial-opacity)) 0,
+                    transparent 1px 2.5vmin,
+                    hsl(from var(--bg-lines) h s l / var(--radial-opacity)) calc(2.5vmin + 1px));
+        }
+
+        &::after {
+            background-image:
+                conic-gradient(#000 var(--trail-length), var(--g) 360deg);
+            mix-blend-mode: var(--blend);
+            animation: rotate var(--speed) linear infinite;
+        }
+    }
+
+    #targets {
+        width: 90%;
+        height: 90%;
+        position: relative;
+        border-radius: 50%;
+        overflow: hidden;
+        background:
+            radial-gradient(circle at 65% 15%, var(--bg-dots), transparent 6px),
+            radial-gradient(circle at 67% 19%, var(--bg-dots), transparent 4px),
+            radial-gradient(circle at 68% 16%, var(--bg-dots), transparent 6px),
+            radial-gradient(circle at 59% 63%, var(--bg-dots), transparent 5px),
+            radial-gradient(circle at 55% 62%, var(--bg-dots), transparent 8px),
+            radial-gradient(circle at 15% 36%, var(--bg-dots), transparent 6px),
+            radial-gradient(circle at 19% 39%, var(--bg-dots), transparent 4px),
+            radial-gradient(circle at 32% 70%, var(--bg-dots), transparent 6px),
+            radial-gradient(circle at 28% 53%, var(--bg-dots), transparent 7px),
+            radial-gradient(circle at 45% 92%, var(--bg-dots), transparent 8px),
+            radial-gradient(circle at 85% 36%, var(--bg-dots), transparent 6px),
+            radial-gradient(circle at 89% 45%, var(--bg-dots) 3px, transparent 5px),
+            radial-gradient(circle at 78% 70%, var(--bg-dots) 4px, transparent 6px),
+            radial-gradient(circle at 33% 85%, var(--bg-dots) 8px, transparent 10px);
+        animation: move 120s infinite linear;
+        background-position: 0 0;
+
+        &::after,
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+        }
+
+        &::after {
+            background:
+                radial-gradient(circle at 10% 50%, var(--bg-dots), transparent 5px),
+                radial-gradient(circle at 90% 50%, var(--bg-dots), transparent 5px),
+                radial-gradient(circle at 60% 10%, var(--bg-dots), transparent 8px),
+                radial-gradient(circle at 70% 90%, var(--bg-dots), transparent 5px);
+            animation: move 200s infinite linear reverse, rotate 200s linear infinite;
+        }
+
+        &::before {
+            background:
+                radial-gradient(circle at 45% 50%, var(--bg-dots), transparent 4px),
+                radial-gradient(circle at 49% 55%, var(--bg-dots), transparent 5px),
+                radial-gradient(circle at 35% 35%, var(--bg-dots), transparent 6px),
+                radial-gradient(circle at 45% 15%, var(--bg-dots), transparent 7px),
+                radial-gradient(circle at 25% 35%, var(--bg-dots), transparent 8px);
+            animation: move 600s infinite linear reverse, rotate 600s linear infinite;
+        }
+    }
+
+    #selector {
+        box-shadow: inset 0 2px 4px #0007;
+        background: var(--bg-dark);
+        cursor: pointer;
+        width: 150px;
+        height: 30px;
+        display: block;
+        position: relative;
+        appearance: none;
+        border-radius: 15px;
+
+        &::before {
+            content: 'Mode 1';
+            color: var(--bg-dark);
+            font-weight: 700;
+            font-size: 1rem;
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            top: 0;
+            left: 0;
+            width: 60%;
+            height: 100%;
+            border-radius: inherit;
+            background:
+                linear-gradient(to bottom,
+                    var(--white-hi), var(--white-low));
+            transition: all .3s ease;
+        }
+
+        &:checked::before {
+            content: 'Mode 2';
+            left: 40%;
+        }
+    }
+}
+
+
+@keyframes rotate {
+    to {
+        transform: translate(-50%, -50%) rotate(1turn)
+    }
+}
+
+@keyframes move {
+    to {
+        background-position: 0 67.5vmin;
+    }
+}

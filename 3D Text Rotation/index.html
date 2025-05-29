@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chaos Coder - 3D Test Rotation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="box">
+        <div class="text"></div>
+    </div>
+
+    <script>
+        let text = document.querySelector('.text');
+        for (let i = 0; i <= 24; i++) {
+            let span = document.createElement('span');
+            span.innerHTML = '<b>CHAOS</b>CODER';
+            span.style.setProperty('--i', i);
+            text.appendChild(span);
+        }
+    </script>
+
+</body>
+
+</html>

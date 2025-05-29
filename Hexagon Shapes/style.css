@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    grid-auto-flow: column;
+    gap: 10px;
+    background: #bdc3c7;
+}
+
+@property --r {
+    syntax: "<number>";
+    inherits: false;
+    initial-value: 0;
+}
+
+@property --a {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+
+img {
+    --r: 0.15;
+    --a: 30deg;
+    width: 280px;
+    aspect-ratio: 1;
+    --_a: (30deg*var(--r));
+    --_r: (50%*cos(30deg)/cos((30deg*(1 - var(--r)))));
+    cursor: pointer;
+    transition: --r .5s, --a .5s;
+    clip-path:
+        shape(from calc(50% + var(--_r)*cos(var(--a) - var(--_a))) calc(50% + var(--_r)*sin(var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(var(--a) + var(--_a))) calc(50% + var(--_r)*sin(var(--a) + var(--_a))) with calc(50% + 50%*cos(var(--a))) calc(50% + 50%*sin(var(--a))),
+            line to calc(50% + var(--_r)*cos(60deg + var(--a) - var(--_a))) calc(50% + var(--_r)*sin(60deg + var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(60deg + var(--a) + var(--_a))) calc(50% + var(--_r)*sin(60deg + var(--a) + var(--_a))) with calc(50% + 50%*cos(60deg + var(--a))) calc(50% + 50%*sin(60deg + var(--a))),
+            line to calc(50% + var(--_r)*cos(120deg + var(--a) - var(--_a))) calc(50% + var(--_r)*sin(120deg + var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(120deg + var(--a) + var(--_a))) calc(50% + var(--_r)*sin(120deg + var(--a) + var(--_a))) with calc(50% + 50%*cos(120deg + var(--a))) calc(50% + 50%*sin(120deg + var(--a))),
+            line to calc(50% + var(--_r)*cos(180deg + var(--a) - var(--_a))) calc(50% + var(--_r)*sin(180deg + var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(180deg + var(--a) + var(--_a))) calc(50% + var(--_r)*sin(180deg + var(--a) + var(--_a))) with calc(50% + 50%*cos(180deg + var(--a))) calc(50% + 50%*sin(180deg + var(--a))),
+            line to calc(50% + var(--_r)*cos(240deg + var(--a) - var(--_a))) calc(50% + var(--_r)*sin(240deg + var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(240deg + var(--a) + var(--_a))) calc(50% + var(--_r)*sin(240deg + var(--a) + var(--_a))) with calc(50% + 50%*cos(240deg + var(--a))) calc(50% + 50%*sin(240deg + var(--a))),
+            line to calc(50% + var(--_r)*cos(300deg + var(--a) - var(--_a))) calc(50% + var(--_r)*sin(300deg + var(--a) - var(--_a))),
+            curve to calc(50% + var(--_r)*cos(300deg + var(--a) + var(--_a))) calc(50% + var(--_r)*sin(300deg + var(--a) + var(--_a))) with calc(50% + 50%*cos(300deg + var(--a))) calc(50% + 50%*sin(300deg + var(--a))));
+}
+
+img:hover {
+    --r: .35;
+    --a: 0deg;
+}
+
+img+img:hover {
+    --a: 60deg;
+}
+

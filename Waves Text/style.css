@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    background-color: #000;
+    font-family: system-ui, sans-serif;
+}
+
+.text {
+    font-weight: 900;
+    font-size: 10vw;
+    color: #1f202000;
+    position: relative;
+    background-clip: text;
+    overflow: clip;
+    background-color: #fefcef;
+
+    &:before,
+    &:after {
+        content: '';
+        position: absolute;
+        background-color: #3cf5;
+        width: 180%;
+        top: 50%;
+        left: 50%;
+        aspect-ratio: 1;
+        translate: -50% 0;
+        border-top-left-radius: 60% 80%;
+        border-top-right-radius: 50% 80%;
+        border-bottom-left-radius: 60% 80%;
+        border-bottom-right-radius: 50% 80%;
+        mix-blend-mode: multiply;
+        animation: rot 10s linear infinite;
+    }
+
+    &:after {
+        animation-delay: -4s;
+        animation-duration: 8s;
+    }
+}
+
+@keyframes rot {
+    to {
+        rotate: 360deg;
+    }
+}

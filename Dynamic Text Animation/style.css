@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #34495e, #8D99AE);
+    font-family: 'Poppins', sans-serif;
+}
+
+.text-wrapper {
+    display: inline-flex;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background: #34495e;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(8px);
+}
+
+.text-wrapper .static-text {
+    color: #EDF2F4;
+    font-size: 50px;
+    font-weight: 500;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.text-wrapper .animated-texts {
+    height: 70px;
+    overflow: hidden;
+    margin-left: 15px;
+    line-height: 79px;
+}
+
+.animated-texts li {
+    color: #3498db;
+    list-style: none;
+    font-size: 60px;
+    font-weight: 600;
+    position: relative;
+    top: 0;
+    animation: slide 6s steps(4) infinite;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slide {
+    100% {
+        top: -318px;
+    }
+}
+
+.animated-texts li span {
+    position: relative;
+}
+
+.animated-texts li span::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #34495e;
+    border-left: 2px solid #2980b9;
+    animation: typing 1.5s steps(10) infinite;
+}
+
+@keyframes typing {
+    100% {
+        left: 100%;
+        margin: 0 -35px 0 35px;
+    }
+}
