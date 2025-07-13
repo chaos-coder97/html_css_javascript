@@ -1,0 +1,246 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --success: #00d8a7;
+    --warning: #ffae00;
+    --error: #ff4b5c;
+    --info: #45b7d1;
+    --bg-dark: #0f1117;
+    --glass: rgba(255, 255, 255, 0.05);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: radial-gradient(circle at 50% 30%, #141627 0%, #0f1117 100%);
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    backdrop-filter: blur(10px);
+    background: var(--glass);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 60px 50px;
+    width: 100%;
+    max-width: 780px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+    text-align: center;
+}
+
+.container::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    background: linear-gradient(135deg, var(--info), var(--error), var(--success));
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.title {
+    font-size: clamp(2.5rem, 7vw, 4rem);
+    font-weight: 700;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 40px;
+    letter-spacing: -1px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+    .controls {
+        flex-wrap: nowrap;
+    }
+}
+
+
+.button {
+    padding: 16px 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #fff;
+    transition: 0.3s;
+    min-width: 160px;
+    position: relative;
+    overflow: hidden;
+}
+
+.button {
+    flex: 1 1 auto;
+    max-width: 200px;
+}
+
+
+.button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+    z-index: 0;
+}
+
+.button:hover::before {
+    transform: translateX(0%);
+}
+
+.button.success {
+    background: linear-gradient(135deg, var(--success), #00b894);
+}
+
+.button.warning {
+    background: linear-gradient(135deg, var(--warning), #f39c12);
+}
+
+.button.error {
+    background: linear-gradient(135deg, var(--error), #c0392b);
+}
+
+.button.info {
+    background: linear-gradient(135deg, var(--info), #3498db);
+}
+
+.notification {
+    position: fixed;
+    background: #11141c;
+    color: white;
+    padding: 22px 24px;
+    width: 380px;
+    height: auto;
+    z-index: 1000;
+    border-radius: 12px;
+    border-left: 6px solid;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    animation: slideInFromRight 0.5s ease-out;
+    display: flex;
+    flex-direction: column;
+    top: 30px;
+    right: 30px;
+}
+
+.notification.success {
+    border-color: var(--success);
+}
+
+.notification.warning {
+    border-color: var(--warning);
+}
+
+.notification.error {
+    border-color: var(--error);
+}
+
+.notification.info {
+    border-color: var(--info);
+}
+
+.notification-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.notification-icon {
+    background: #222;
+    border-radius: 6px;
+    padding: 8px;
+    margin-right: 12px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.notification.success .notification-icon {
+    color: var(--success);
+}
+
+.notification.warning .notification-icon {
+    color: var(--warning);
+}
+
+.notification.error .notification-icon {
+    color: var(--error);
+}
+
+.notification.info .notification-icon {
+    color: var(--info);
+}
+
+.notification-title {
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.notification-message {
+    font-size: 0.95rem;
+    color: #ccc;
+}
+
+.close-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-button:hover {
+    color: #fff;
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 40px 30px;
+    }
+
+    .controls {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .button {
+        width: 100%;
+        max-width: 300px;
+    }
+}
