@@ -1,0 +1,33 @@
+.container {
+    display: inline-grid;
+}
+
+.container img {
+    --s: 120px;
+    --g: 10px;
+
+    width: var(--s);
+    grid-area: 1/1;
+    offset:
+        circle(calc(var(--s)/(2*sin(.5turn/sibling-count())) + var(--g))) calc(100%*sibling-index()/sibling-count()) 0deg;
+    transition: 1s 1s;
+
+    @starting-style {
+        offset: circle(0px) 0% 0deg;
+    }
+
+    border: 2px solid #333;
+    background: #fff;
+    padding: 5px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+    background: #0a0a23;
+}
