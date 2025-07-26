@@ -1,0 +1,46 @@
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f2f4f8;
+    color: #333;
+    margin: 0;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1 {
+    color: #0f62fe;
+    margin-bottom: 1rem;
+}
+
+ul#userList {
+    list-style: none;
+    padding: 0;
+    max-width: 600px;
+    width: 100%;
+    display: grid;
+    gap: 1rem;
+}
+
+li {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+
+li:hover {
+    transform: translateY(-3px);
+}
+
+.username {
+    font-weight: bold;
+    color: #0f62fe;
+}
+
+.email {
+    color: #555;
+    font-size: 0.9rem;
+}
